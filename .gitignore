@@ -1,0 +1,10 @@
+# ignore node_modules
+node_modules/
+
+# editor settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
