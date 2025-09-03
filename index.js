@@ -1,13 +1,14 @@
-const express = require('express');
+import express from 'express'
+
 const app = express()
 const port = 3000
+app.set('view engine', 'ejs')
 
-app.listen(port, () => console.log('Server starts on ' + port))
+app.listen(port)
 
 app.get('/', (req, res) => {
   // res.status(200).json('Server is working');
-  
-  res.send('Hello World!!! updated text')
+   res.render("index", {'text':'World'})
 })
 
 app.get('/character/:id', (req, res) => {
@@ -25,12 +26,27 @@ app.get('/character/:id', (req, res) => {
  
 })
 
-app.get('/movie/:id', (req, res) => {
+app.get('/films/', async(req, res, next) => {
 
-  res.send('Hello movie!'+ req.params.id)
+  try {
+    const r = await fetch(
+      "https://www.swapi.tech/api/films/"
+    );
+
+    if (!r.ok) {
+      throw new Error(`Error ${r.status}`);
+    }
+
+    const data = await r.json();
+    res.json(data);
+  } catch (err) {
+    next(err); 
+  }
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+
+app.use((err, req, res, next) => {
+  console.error("Error:", err.message);
+  res.status(500).json({ error: err.message });
+});
 
