@@ -1,4 +1,5 @@
 import express from 'express'
+import filmsRouter from "./routes/films.js";
 
 const app = express()
 const port = 3000
@@ -26,23 +27,22 @@ app.get('/character/:id', (req, res) => {
  
 })
 
-app.get('/films/', async(req, res, next) => {
+app.use('/films', filmsRouter)
 
-  try {
-    const r = await fetch(
-      "https://www.swapi.tech/api/films/"
-    );
-
-    if (!r.ok) {
-      throw new Error(`Error ${r.status}`);
-    }
-
-    const data = await r.json();
-    res.json(data);
-  } catch (err) {
-    next(err); 
-  }
-})
+// app.get('/films/', async(req, res, next) => {
+//   try {
+//     const r = await fetch(
+//       "https://www.swapi.tech/api/films/"
+//     );
+//     if (!r.ok) {
+//       throw new Error(`Error ${r.status}`);
+//     }
+//     const data = await r.json();
+//     res.json(data);
+//   } catch (err) {
+//     next(err); 
+//   }
+// })
 
 
 app.use((err, req, res, next) => {
