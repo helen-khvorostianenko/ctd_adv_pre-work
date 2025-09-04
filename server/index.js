@@ -1,15 +1,17 @@
-import express from 'express'
+import express from 'express';
 import filmsRouter from "./routes/films.js";
+import cors from 'cors';
 
 const app = express()
 const port = 3000
-app.set('view engine', 'ejs')
+
+app.set('view engine', 'ejs');
+app.use(cors({ origin: 'http://localhost:5173' })); 
 
 app.listen(port)
 
 app.get('/', (req, res) => {
-  // res.status(200).json('Server is working');
-   res.render("index", {'text':'World'})
+  res.status(200).json({message: "Server is working"});
 })
 
 app.get('/character/:id', (req, res) => {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,40 +6,24 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
 
-  const [films, setFilms] = useState([
-    {title:'film 05', url:"www.youtube.com"},
-    {title:'film 06', url:"www.youtube.com"},
-    {title:'film 07', url:"www.youtube.com"},
-    {title:'film 08', url:"www.youtube.com"},
-  ]) 
+  const [films, setFilms] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/films')
+      .then(res => {
+        console.log(res);
+        return res.json()
+      })
+      .then(data => setFilms(data.result))
+      .catch(err => console.error(err));
+  }, []);
 
   console.log(films);
 
   return (
     <>
-      {/* <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
-
       <div>
-        <h1>Films</h1>
+        <h1>Film</h1>
         <ul>
           <a href="https://react.dev" target="_blank">
            <li>film 01</li>
@@ -48,8 +32,8 @@ function App() {
           <li>film 03</li>
           <li>film 04</li>
           {films.map(film => {
-            return <a href={film.url} target="_blank">
-           <li>{film.title}</li>
+            return <a href="" target="_blank">
+           <li>{film.properties.title}</li>
           </a>
           })}
         </ul>
