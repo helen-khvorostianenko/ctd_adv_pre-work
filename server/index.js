@@ -6,7 +6,9 @@ const app = express()
 const port = 3000
 
 app.set('view engine', 'ejs');
-app.use(cors({ origin: 'http://localhost:5173' })); 
+app.use(cors({
+  origin: [/http:\/\/localhost:\d+$/]
+})); 
 
 app.listen(port)
 

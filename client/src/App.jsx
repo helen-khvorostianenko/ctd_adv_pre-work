@@ -11,10 +11,11 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:3000/films')
       .then(res => {
-        console.log(res);
         return res.json()
       })
-      .then(data => setFilms(data.result))
+      .then(data => {
+        setFilms(data)}
+      )
       .catch(err => console.error(err));
   }, []);
 
@@ -25,15 +26,9 @@ function App() {
       <div>
         <h1>Film</h1>
         <ul>
-          <a href="https://react.dev" target="_blank">
-           <li>film 01</li>
-          </a>
-          <li>film 02</li>
-          <li>film 03</li>
-          <li>film 04</li>
           {films.map(film => {
-            return <a href="" target="_blank">
-           <li>{film.properties.title}</li>
+            return <a href={film.url} target="_blank">
+           <li>{film.title}</li>
           </a>
           })}
         </ul>
