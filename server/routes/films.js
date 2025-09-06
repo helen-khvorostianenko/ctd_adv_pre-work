@@ -25,7 +25,7 @@ router.get('/', async(req, res, next) => {
       }
     ))
      .sort((a,b) => (
-      new Date(a.release_date) - new Date(b.release_date)
+      new Date(a.episode_id) - new Date(b.episode_id)
     ));
     res.json(result);
   } catch (err) {
