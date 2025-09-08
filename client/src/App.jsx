@@ -3,6 +3,7 @@ import { Routes, Route, Link, Outlet } from "react-router";
 import Films from './pages/Films';
 import Characters from './pages/Characters';
 import Layout from './layouts/layout';
+import Character from './pages/Character';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           </>} /> 
         <Route path="films" element={<Films />} />
         <Route path="characters" element={<Characters />} />
+        <Route path="characters/:id" element={<Character />} />
       </Route>
     </Routes>
   );

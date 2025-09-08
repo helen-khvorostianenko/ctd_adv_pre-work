@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from "react-router";
 
 function Characters() {
   const [characters, setCharacter] = useState([]);
@@ -72,14 +73,10 @@ function Characters() {
         <ul className="grid">
           {characters.map((char) => (
             <li key={char.uid ?? char.name}>
-              <a
+              <Link 
+                to={`/characters/${encodeURIComponent(char.uid)}`}
                 className="char-link"
-                href={char.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {char.name}
-              </a>
+              >{char.name}</Link>
             </li>
           ))}
         </ul>
@@ -88,11 +85,9 @@ function Characters() {
           <button className="btn" disabled={!hasPrev || page === 1} onClick={() => setPage(p => Math.max(1, p - 1))}>
             Prev
           </button>
-
           <span className="page-indicator">
             Page {page} of {totalPages} 
           </span>
-
           <button className="btn" disabled={!hasNext || page >= totalPages} onClick={() => setPage(p => p + 1)}>
             Next
           </button>

@@ -212,3 +212,84 @@ body, #root { margin: 0; background: var(--bg); color: var(--text); font-family:
   border-color: #2a335a;
   color: #9aa3b2;
 }
+
+/* ===== Character detail page ===== */
+
+.detail-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.detail-header .title{
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: .3px;
+}
+
+.char-table{
+  width: 100%;
+  border-collapse: collapse;
+}
+.char-table th,
+.char-table td{
+  padding: 12px 16px;
+  vertical-align: top;
+}
+.char-table th{
+  width: 180px;
+  text-align: left;
+  color: var(--muted);
+  font-weight: 600;
+}
+.char-table tr:not(:last-child) th,
+.char-table tr:not(:last-child) td{
+  border-bottom: 1px solid var(--border);
+}
+.char-table td{
+  word-break: break-word; 
+}
+.char-table a{
+  color: var(--brand-2);
+  text-decoration: none;
+}
+.char-table a:hover{
+  color: var(--text);
+  text-decoration: underline;
+}
+.card > .char-table{
+  margin: 6px 8px 10px;
+}
+
+.chip-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #10162a;
+  border: 1px solid #222a41;
+  color: #cfd7ef;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1;
+  transition: background .2s ease, border-color .2s ease, transform .15s ease;
+}
+.chip:hover{
+  background: #19213a;
+  border-color: #2b365a;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 560px){
+  .char-table th,
+  .char-table td{ padding: 12px; }
+}
