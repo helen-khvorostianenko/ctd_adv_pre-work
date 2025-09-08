@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { BASE_URL } from '../constants/config.js';
+import { BASE_URL, SWAPI_URL, DEFAULT_LIMIT } from '../constants/config.js';
 
 const router = Router();
 
@@ -13,9 +13,14 @@ async function fetchFromSwapi(url) {
 
 router.get('/', async(req, res, next) => {
   try {
-    const data = await fetchFromSwapi("https://www.swapi.tech/api/people/");
+    const page = req.query.page ? parseInt(req.query.page, 10) : null;
+    const url = page
+      ? `${SWAPI_URL}/people?page=${page}&limit=${DEFAULT_LIMIT}`
+      : `${SWAPI_URL}/people`;
+
+    const data = await fetchFromSwapi(url);
     const baseUrl = `${BASE_URL}${req.baseUrl}`
-    const result = data.results.map((item) => (
+    const results = (data.results || []).map((item) => (
       { 
         uid: item.uid,
         name: item.name,
@@ -24,7 +29,18 @@ router.get('/', async(req, res, next) => {
       }
     ))
      .sort((a,b) => (a.uid - b.uid));
-    res.json(result);
+     console.log(results);
+    res.json({
+      page: page ?? 1,
+      limit: DEFAULT_LIMIT,
+      total: data.total_records ?? results.length,
+      total_pages: data.total_pages ?? (
+        Math.max(1, Math.ceil((data.total_records ?? results.length) / limit))
+      ),
+      next: data.next ?? null,
+      previous: data.previous ?? null,
+      results,
+    });
   } catch (err) {
     next(err); 
   }
