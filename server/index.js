@@ -21,8 +21,12 @@ app.get('/', (req, res) => {
 app.use('/films', filmsRouter)
 app.use('/characters', charactersRouter)
 
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not Found', path: req.originalUrl });
+});
+
 app.use((err, req, res, next) => {
-  console.error("Error:", err.message);
-  res.status(500).json({ error: err.message });
+  console.error('Error:', err);
+  res.status(err.status || 500).json({ error: err.message || 'Server error' });
 });
 

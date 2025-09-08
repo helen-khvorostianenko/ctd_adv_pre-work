@@ -37,7 +37,7 @@ router.get('/:id', async(req, res, next) => {
   try {
     const id = req.params.id
     if (!id) {
-      res.status(400).json({'message': 'Film id non found'})
+      return res.status(400).json({'message': 'Film id non found'})
     }
     const data = await fetchFromSwapi(`https://www.swapi.tech/api/films/${id}`);
     res.json(data);
