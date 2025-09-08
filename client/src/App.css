@@ -52,11 +52,10 @@ body, #root { margin: 0; background: var(--bg); color: var(--text); font-family:
 /* Grid of cards */
 .grid{
   list-style: none;
-  padding: 0;
   margin: 0;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 18px;
+  gap: 18px;  
 }
 @media (max-width: 1200px){ .grid{ grid-template-columns: repeat(9, 1fr);} }
 @media (max-width: 900px){ .grid{ grid-template-columns: repeat(6, 1fr);} }

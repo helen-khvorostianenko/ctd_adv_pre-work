@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from "react-router";
 
 function Films() {
   const [films, setFilms] = useState([]);
@@ -81,15 +82,16 @@ function Films() {
                 </p>
 
                 <div className="actions">
-                  <a
+                  <Link 
+                    to={`/films/${encodeURIComponent(film.episode_id)}`}
                     className="btn"
-                    href={film.url}
                     target="_blank"
                     rel="noreferrer"
                     title="Open original source"
                   >
                     Details
-                  </a>
+                  </Link>
+
                 </div>
               </div>
             </li>
