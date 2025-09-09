@@ -1,16 +1,17 @@
-import { Outlet, useParams } from "react-router";
+import {Outlet} from 'react-router';
 
 function Layout() {
-    // const location = useParams();
-    // const isMainPage = location.
+  return (
+    <div className="layout">
+      <header className="header">Header</header>
 
-    return (
-        <>
-            Header
-            <Outlet />
-            Footer
-        </>
-    );
-};
+      <main className="main">
+        <Outlet />
+      </main>
+
+      <footer className="footer">Footer</footer>
+    </div>
+  );
+}
 
 export default Layout;

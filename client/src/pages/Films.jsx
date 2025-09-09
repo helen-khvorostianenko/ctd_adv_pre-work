@@ -6,7 +6,6 @@ function Films() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  
   useEffect(() => {
     fetch('http://localhost:3000/films')
       .then(async (res) => {
@@ -17,49 +16,33 @@ function Films() {
         return res.json();
       })
       .then(data => {
-        setFilms(Array.isArray(data) ? data : data.result || [])
+        setFilms(Array.isArray(data) ? data : data.result || []);
       })
       .catch((err) => {
-        setError(err.message || "Failed to load")
+        setError(err.message || "Failed to load");
       })
-      .finally(() => setLoading(false));;
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) {
-    return (
-      <main className="container">
-        <div className="page-title">
-          <h1>Star Wars Films</h1>
-          <p className="subtitle">Loading…</p>
-        </div>
-      </main>
-    );
-  }
-  
-  if (error) {
-    return (
-      <main className="container">
-        <div className="page-title">
-          <h1>Star Wars Films</h1>
-          <p className="subtitle error">Error: {error}</p>
-        </div>
-      </main>
-    );
-  }
+  const pageTitle = loading ? (
+    <p className="subtitle">Loading…</p>
+  ) : error ? (
+    <p className="subtitle error">Error: {error}</p>
+  ) : (
+    <p className="subtitle">A long time ago in a galaxy far, far away…</p>
+  );
 
-    return (
-        <main className="container">
+  return (
+    <main className="container">
       <div className="page-title">
         <h1>Star Wars Films</h1>
-        <p className="subtitle">A long time ago in a galaxy far, far away…</p>
+          {pageTitle}
       </div>
-
       {films.length === 0 ? (
         <div className="empty">No films yet.</div>
       ) : (
         <ul className="grid">
           {films.map((film) => (
-            
             <li className="card" key={film.uid ?? film.title}>
               <div className="poster-wrap">
                 {film.img ? (
@@ -81,7 +64,6 @@ function Films() {
                   Release:&nbsp;
                   <time dateTime={film.release_date}>{film.release_date}</time>
                 </p>
-
                 <div className="actions">
                   <Link 
                     to={`/films/${encodeURIComponent(film.episode_id)}`}
@@ -92,7 +74,6 @@ function Films() {
                   >
                     Details
                   </Link>
-
                 </div>
               </div>
             </li>
@@ -100,7 +81,7 @@ function Films() {
         </ul>
       )}
     </main>
-    );
+  );
 }
 
 export default Films;

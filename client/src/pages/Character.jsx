@@ -90,7 +90,7 @@ function Character() {
     <main className="container">
       <header className="detail-header">
         <h1 className="title">{name || `Character #${id}`}</h1>
-        <Link to="/characters" className="btn">← Back to list</Link>
+        <Link to="/characters" className="btn">← Character list</Link>
       </header>
 
       <div className="card">
