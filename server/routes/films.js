@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { EPISODE_POSTERS } from "../constants/films.js";
+import { BASE_URL, SWAPI_URL } from '../constants/config.js';
+
 
 const router = Router();
 
@@ -13,14 +15,18 @@ async function fetchFromSwapi(url) {
 
 router.get('/', async(req, res, next) => {
   try {
-    const data = await fetchFromSwapi("https://www.swapi.tech/api/films/");
+    const url = `${SWAPI_URL}/films`;
+    const data = await fetchFromSwapi(url);
+    const baseUrl = `${BASE_URL}${req.baseUrl}`;
+
     const result = data.result.map((item) => (
       { 
         uid: item.uid,
         episode_id: item.properties.episode_id,
         title: item.properties.title,
         release_date: item.properties.release_date,
-        url: item.properties.url,
+        ext_url: item.url,
+        api_url: `${baseUrl}/${item.uid}`,
         img: EPISODE_POSTERS[item.properties.episode_id]
       }
     ))
@@ -39,8 +45,24 @@ router.get('/:id', async(req, res, next) => {
     if (!id) {
       return res.status(400).json({'message': 'Film id non found'})
     }
-    const data = await fetchFromSwapi(`https://www.swapi.tech/api/films/${id}`);
-    res.json(data);
+    
+    const url = `${SWAPI_URL}/films/${id}`;
+    const data = await fetchFromSwapi(url);
+    
+    const img = EPISODE_POSTERS[id] ?? null;
+
+    const response = {
+      ...data,
+      result: {
+        ...data.result,
+        properties: {
+          ...data.result?.properties,
+          img,
+        },
+      },
+    };
+
+    res.json(response);
   } catch (err) {
     next(err); 
   }

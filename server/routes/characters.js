@@ -19,7 +19,7 @@ router.get('/', async(req, res, next) => {
       : `${SWAPI_URL}/people`;
 
     const data = await fetchFromSwapi(url);
-    const baseUrl = `${BASE_URL}${req.baseUrl}`
+    const baseUrl = `${BASE_URL}${req.baseUrl}`;
     const results = (data.results || []).map((item) => (
       { 
         uid: item.uid,
@@ -29,7 +29,7 @@ router.get('/', async(req, res, next) => {
       }
     ))
      .sort((a,b) => (a.uid - b.uid));
-     console.log(results);
+     
     res.json({
       page: page ?? 1,
       limit: DEFAULT_LIMIT,

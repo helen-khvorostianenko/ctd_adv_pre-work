@@ -59,6 +59,7 @@ function Films() {
       ) : (
         <ul className="grid">
           {films.map((film) => (
+            
             <li className="card" key={film.uid ?? film.title}>
               <div className="poster-wrap">
                 {film.img ? (

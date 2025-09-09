@@ -21,8 +21,8 @@ function Character() {
             }
             return res.json();
         })
-        .then((json) => {
-            const r = json?.result ?? json;
+        .then((data) => {
+            const r = data?.result ?? data;
             const p = r?.properties ?? {};
             setCharacter({
             uid: r?.uid,
@@ -74,12 +74,14 @@ function Character() {
         arr.length ? (
         <ul className="chip-list">
             {arr.map((u) => {
-            const last = u.split('/').filter(Boolean).pop();
-            return (
-                <li key={u}>
-                <a className="chip" href={u} target="_blank" rel="noreferrer">{last}</a>
-                </li>
-            );
+                const id = new URL(u).pathname.split('/').filter(Boolean).pop();
+                return (
+                    <li key={u}>
+                        <Link className="chip" to={`/films/${encodeURIComponent(id)}`}>
+                            {id}
+                        </Link>
+                    </li>
+                );
             })}
         </ul>
         ) : '—';
