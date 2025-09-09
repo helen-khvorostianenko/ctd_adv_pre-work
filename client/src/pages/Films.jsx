@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Link } from "react-router";
+import {useState, useEffect} from 'react';
+import {Link} from "react-router";
 
 function Films() {
   const [films, setFilms] = useState([]);
@@ -9,7 +9,7 @@ function Films() {
   useEffect(() => {
     fetch('http://localhost:3000/films')
       .then(async (res) => {
-        if (!res.ok) {  
+        if (!res.ok) {
           const text = await res.text();
           throw new Error(`${res.status} ${res.statusText} – ${text}`);
         }
@@ -36,7 +36,7 @@ function Films() {
     <main className="container">
       <div className="page-title">
         <h1>Star Wars Films</h1>
-          {pageTitle}
+        {pageTitle}
       </div>
       {films.length === 0 ? (
         <div className="empty">No films yet.</div>
@@ -65,7 +65,7 @@ function Films() {
                   <time dateTime={film.release_date}>{film.release_date}</time>
                 </p>
                 <div className="actions">
-                  <Link 
+                  <Link
                     to={`/films/${encodeURIComponent(film.episode_id)}`}
                     className="btn"
                     target="_blank"

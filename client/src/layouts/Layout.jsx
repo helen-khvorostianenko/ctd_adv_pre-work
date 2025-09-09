@@ -12,7 +12,7 @@ function Layout() {
       </header>
 
       <main className="main">
-        <Outlet />
+        <Outlet/>
       </main>
 
       <footer className="footer">Footer</footer>
