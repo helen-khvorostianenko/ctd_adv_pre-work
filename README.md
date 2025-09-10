@@ -1,12 +1,54 @@
-# React + Vite
+# Code the Dream Advanced Pre-Work Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project consists of:
 
-Currently, two official plugins are available:
+* **Client:** React
+* **Server:** Express.js
+* **External API:** [SWAPI.tech](https://www.swapi.tech/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Running Locally
 
-## Expanding the ESLint configuration
+1. **Clone the repository**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. **Install all dependencies**
+
+   ```bash
+   npm run install-all
+   ```
+
+3. **Start the application**
+
+   ```bash
+   npm run dev
+   ```
+
+## Routes
+
+* Home page → `/`
+* Films list → `/films`
+* Film page → `/films/{id}`
+* Characters list → `/characters`
+* Character page → `/characters/{id}`
+
+## Project Structure
+
+```
+project-root/
+├── client/              # React application (frontend)
+│   ├── public/          # Static assets (e.g., starwars-icon.png)
+│   └── src/
+│       ├── layouts/     # Layout components
+│       ├── pages/       # Page components
+│       ├── App.jsx      # Root React component
+│       ├── App.css      # App styling
+│       ├── index.css    # Global styles
+│       ├── main.jsx     # Entry point for React
+│
+├── server/              # Express.js application (backend)
+│   ├── routes/          # API routes
+│   ├── constants/       # Constants and config values
+│   └── index.js         # Server entry point
+│
+├── package.json         # Root scripts (install-all, dev, etc.)
+└── README.md
+```
