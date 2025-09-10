@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {useParams, Link} from 'react-router';
+import {useParams, useLocation, Link} from 'react-router';
 
 function Film() {
   const params = useParams();
@@ -8,6 +8,9 @@ function Film() {
   const [film, setFilm] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  const location = useLocation();
+  const from = location.state?.from;
 
   useEffect(() => {
     if (!id) return;
@@ -73,17 +76,17 @@ function Film() {
       <p className="subtitle error" role="alert">
         Error: {error}
       </p>
-      <Link to="/films" className="btn">
-        ← Back
-      </Link>
+        <Link to="/films" className="btn">← Film list</Link>
     </>
   ) : (
     <>
       <header className="detail-header">
         <h1 className="title">{title || `Film #${id}`}</h1>
-        <Link to="/films" className="btn">
-          ← Film list
-        </Link>
+        {from === "character" ? (
+          <Link to={-1} className="btn">← Back to character</Link>
+        ) : (
+          <Link to="/films" className="btn">← Film list</Link>
+        )}
       </header>
     </>
   );

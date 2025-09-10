@@ -45,16 +45,22 @@ function Films() {
           {films.map((film) => (
             <li className="card" key={film.uid ?? film.title}>
               <div className="poster-wrap">
-                {film.img ? (
-                  <img
-                    className="poster"
-                    src={film.img}
-                    alt={`${film.title} poster`}
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="poster placeholder">No Image</div>
-                )}
+                <Link
+                  to={`/films/${encodeURIComponent(film.episode_id)}`}
+                  state={{ from: "films" }}
+                  title={`Go to ${film.title} details`}
+                >
+                  {film.img ? (
+                    <img
+                      className="poster"
+                      src={film.img}
+                      alt={`${film.title} poster`}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="poster placeholder">No Image</div>
+                  )}
+                </Link>
                 <span className="badge">EP {film.episode_id}</span>
               </div>
 
@@ -67,6 +73,7 @@ function Films() {
                 <div className="actions">
                   <Link
                     to={`/films/${encodeURIComponent(film.episode_id)}`}
+                    state={{ from: "films" }}
                     className="btn"
                     target="_blank"
                     rel="noreferrer"

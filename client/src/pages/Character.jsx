@@ -70,11 +70,15 @@ function Character() {
     arr.length ? (
       <ul className="chip-list">
         {arr.map((u) => {
-          const id = new URL(u).pathname.split('/').filter(Boolean).pop();
+          const itemId = new URL(u).pathname.split('/').filter(Boolean).pop();
           return (
             <li key={u}>
-              <Link className="chip" to={`/films/${encodeURIComponent(id)}`}>
-                {id}
+              <Link
+                className="chip"
+                to={`/films/${encodeURIComponent(itemId)}`}
+                state={{ from: "character", id }}
+              >
+                {itemId}
               </Link>
             </li>
           );
