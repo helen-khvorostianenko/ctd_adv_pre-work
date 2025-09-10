@@ -66,7 +66,7 @@ function Characters() {
       {characters.length === 0 ? (
         <div className="empty">No characters yet.</div>
       ) : (
-        <ul className="grid">
+        <ul className="char-list">
           {characters.map((char) => (
             <li key={char.uid ?? char.name}>
               <Link
