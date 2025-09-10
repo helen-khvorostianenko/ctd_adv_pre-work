@@ -46,10 +46,10 @@ function Layout() {
       <footer className="footer">
         <div className="footer__inner container">
           <p className="footer__text">
-            Data: <a href="https://swapi.dev" target="_blank" rel="noreferrer">SWAPI</a>
+            Data: <a href="https://swapi.tech" target="_blank" rel="noreferrer">SWAPI</a>
           </p>
           <p className="footer__text">
-            Made by <a href="#">Olena Khvorostianenko</a>
+            Made by <a href="https://www.linkedin.com/in/helen-khvorostianenko/" target="_blank">Olena Khvorostianenko</a>
           </p>
         </div>
       </footer>
